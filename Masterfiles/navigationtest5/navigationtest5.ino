@@ -18,6 +18,9 @@ int in4 = 4;
 
 int mtdirec[4] = {1,1,1,1};
 
+int Adir = 1;
+int Bdir = 1;
+
 int direc = 0;//f = 0,b = 1, l = 2, r = 3, s = 4
 
 void setup() {
@@ -36,6 +39,7 @@ void setup() {
   digitalWrite(in4, LOW);
   analogWrite(enA, 0);
   analogWrite(enB, 0);
+  
   //initialise Serial communication on 9600 baud
   Serial.begin(9600);
   while(!Serial);
@@ -85,38 +89,69 @@ if(Serial.available()){
   Bprev = B;
   A = value1.toInt();
   B = value2.toInt();
-  motor(enA, in1, in2, A ,Aprev);
-  motor(enB, in3, in4, B ,Bprev);
-  //Serial.println(A);
- // Serial.println(B);
-   
-
-} 
-
-}
-//motor(enA, in1, in2, A ,Aprev)
-//motor(enB, in3, in4, B ,Bprev)
-void motor(int mtc, int drc1, int drc2, int neew, int oold){
-  int ramp = 1;
-  if(neew > 0 && oold <= 0){
-    analogWrite(mtc,0);
-    digitalWrite(drc2, HIGH);
-    digitalWrite(drc1, LOW);
-    analogWrite(mtc,neew);
-    
+ 
+  /*
+  if((Aprev > 0 && A < 0) || (Aprev < 0 && A > 0)){
+      Adir = 0;
   }
-  else if(neew < 0 && oold >= 0){
-    analogWrite(mtc,0);
-    digitalWrite(drc2, LOW);
-    digitalWrite(drc1, HIGH);
-    analogWrite(mtc,-neew);
-    
-  } else if(abs(neew) > abs(oold)){
-      analogWrite(mtc,abs(neew));
-      Serial.println(neew);
-  } else if(abs(neew) < abs(oold)){
-      analogWrite(mtc,abs(neew));
+  else {
+      Adir = 1;
+  }
+  if((Bprev > 0 && B < 0) || (Bprev < 0 && B > 0)){
+      Bdir = 0;
+  }
+  else{
+      Bdir = 1;
+  }
+
+  if((Bdir == 0) || (Adir == 0)){ 
+      for (int i = 255 ; i > 0; i--) {
+          if(i > Aprev && Adir == 0){
+            analogWrite(enA,i);
+          }
+          if(i > Bprev && Bdir == 0){
+            analogWrite(enB,i);
+          }
+      }
+      if(Aprev < 0 && Adir == 0){
+        digitalWrite(in1, HIGH);
+        digitalWrite(in2, LOW);
+      }
+      else if(Adir == 0) {
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+      }
+      if(Bprev < 0 && Bdir == 0){
+        digitalWrite(in3, HIGH);
+        digitalWrite(in4, LOW);
+      }
+      else if(Bdir == 0) {
+        digitalWrite(in3, LOW);
+        digitalWrite(in4, HIGH);
+      }
      
   }
-  Serial.println(neew);
+  */
+  int k = 0;
+  for(int i = 255 ; i > 0; i--){
+    k = 255-i;
+    if((A > Aprev) && (k >= Aprev && k<A )){
+      analogWrite(enA,k);
+    }
+    if((B > Bprev) && (k >= Bprev && k<B )){
+      analogWrite(enB,k);
+    }
+    if((A < Aprev) && (i <= Aprev && i>A )){
+      analogWrite(enA,i);
+    }
+    if((B < Bprev) && (i <= Bprev && i>B )){
+      analogWrite(enB,i);
+    }
+  }
+
+Serial.println(A);
+Serial.println(B);
+
+}
+
 }
