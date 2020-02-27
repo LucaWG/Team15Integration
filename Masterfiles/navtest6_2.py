@@ -167,10 +167,10 @@ while GO:
 				        	# print doesn't work with curses, use addstr instead
 						#print('d')
 				        	screen.addstr(0, 0, "right    ")
-						ser.write('140,-140,')
+						ser.write('140,0,')
 				        elif char == ord('a'): # left
 				        	screen.addstr(0, 0, 'left     ')
-						ser.write('-140,140,')       
+						ser.write('0,140,')       
 				        elif char == ord('w'): # forwards
 				        	screen.addstr(0, 0, 'forwards  ')
 						ser.write('140,140,')       

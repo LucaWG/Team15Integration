@@ -14,12 +14,12 @@ int Aprev = 0;// previous A
 
 // Motor A connections
 int enA = 9;
-int in1 = 8;
-int in2 = 7;
+int in1 = 7;
+int in2 = 8;
 // Motor B connections
 int enB = 3;
-int in3 = 5;
-int in4 = 4;
+int in3 = 4;
+int in4 = 5;
 
 int neew = 0;//for gettings abs val of A
 int oold = 0;//for getting abs val of Aprev
@@ -31,7 +31,7 @@ int s2 = 0;//A B and Bprev different signs?
 int reedy = 1;
 
 double ramp = 0;//how fast does it ramp to the stuff
-int steep = 5;
+int steep = 1;
   
 int mtdirec[4] = {1,1,1,1};//DELETE ME!!!!!! I'm a useless piece of shit...the code that is
 
