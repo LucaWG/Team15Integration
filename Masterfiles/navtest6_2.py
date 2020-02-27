@@ -21,14 +21,14 @@ theta2 = 0
 denom = 0
 inside = 0
 inside2 = 0
-influ = 4 # beeeg boi # also good
+influ = 3 # beeeg boi # also good
 bigang = 45
 angleoff = 0
 buffer = .5;
-steps = .5 # .5 is good
+steps = 1 # .5 is good
 iterat = 0;#place in way point vector
-wpx = [8.5, 5.9, 2.2, 5.2]
-wpy = [-1.5, -3.8, .78, 3]
+wpx = [8.8, 5.7, 2.3, 5]
+wpy = [-1.6, -4.1, .45, 3.3]
 
 num = 60 # plot vars
 xvals = [None] * num
@@ -94,34 +94,40 @@ while GO:
 				#if angleoff > 80
 			
 			#angleoff = tpf1 - tpf2 # pos is to the right, neg is to the left of goal based on direction
+
 			if((x3 + buffer) > x2 > (x3 - buffer)) and ((y3 + buffer) > y2 > (y3 - buffer)):
 				angleoff = 0;
 				iterat = iterat + 1
 				if iterat == 4:
 					iterat = 0
 					ser.write("0,0,0,")
-					sleep(10)
+					sleep(2)
 				ser.write("0,0,0")
 				sleep(1)
 				print("there! turn right please.")
 				ser.write('255,0,')
-				sleep(1.9)
+				sleep(1.75)
 				ser.write('0,0,')
 				sleep(1)
 				ser.write("255,255,")
 				sleep(2)
+
 			if angleoff > 0:
 				left = 255 # - angleoff * influ; # see if sin(theta) is better as well
 				right = 255 - angleoff * influ;
 				print(str(left)+" " +str(right))
 				op = str(left) + "," + str(right) + ","
 				ser.write(op)
+				sleep(.5)
+				ser.write("255,255,")
 			if angleoff < 0:
 				left = 255 + angleoff * influ;
 				right = 255# + angleoff * influ;
 				print(str(left)+" " +str(right))
 				op = str(left) + "," + str(right) + ","
 				ser.write(op)
+				sleep(.5)
+				ser.write("255,255,")
 			print(" theta: " +str(angleoff))
 			print(" ")
 			# print("theta2: " +str(tpf1))
@@ -161,22 +167,23 @@ while GO:
 				        	# print doesn't work with curses, use addstr instead
 						#print('d')
 				        	screen.addstr(0, 0, "right    ")
-						ser.write('255,0,')
+						ser.write('140,-140,')
 				        elif char == ord('a'): # left
 				        	screen.addstr(0, 0, 'left     ')
-						ser.write('0,255,')       
+						ser.write('-140,140,')       
 				        elif char == ord('w'): # forwards
 				        	screen.addstr(0, 0, 'forwards  ')
-						ser.write('255,255,')       
+						ser.write('140,140,')       
 				        elif char == ord('s'): # backwards
 				        	screen.addstr(0, 0, 'backwards ')
-						ser.write('-255,-255,')
+						ser.write('-140,-140,')
 					elif char == ord('e'): # stop
 						screen.addstr(0, 0, 'stop     ')
 						ser.write('0,0,')
 				else:	
 					screen.addstr(0, 0, 'now auto   ')
-				spacing = 2 # number of seconds between check location
+				#sleep(1);
+				spacing = 1 # number of seconds between check location
 				if(counting % spacing/waitin == 0):
 					pos = hedge.position()
 					#print("X: " + str(pos[1]))
