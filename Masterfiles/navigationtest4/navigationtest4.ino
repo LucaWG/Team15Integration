@@ -8,14 +8,21 @@ int Bprev = 0;
 int Aprev = 0;
 
 // Motor A connections
-int enA = 9;
+/*int enA = 9;
 int in1 = 8;
 int in2 = 7;
 // Motor B connections
 int enB = 3;
 int in3 = 4;
 int in4 = 5;
-
+*/
+int enA = 3;
+int in1 = 5;
+int in2 = 4;
+// Motor B connections
+int enB = 9;
+int in3 = 7;
+int in4 = 8;
 int mtdirec[4] = {1,1,1,1};
 
 int direc = 0;//f = 0,b = 1, l = 2, r = 3, s = 4

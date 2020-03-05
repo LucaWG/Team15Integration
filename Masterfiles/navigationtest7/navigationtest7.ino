@@ -13,13 +13,13 @@ int Bprev = 0;//previous B - a more OCD person would swap this with the line bel
 int Aprev = 0;// previous A
 
 // Motor A connections
-int enA = 9;
-int in1 = 7;
-int in2 = 8;
+int enA = 3;
+int in1 = 5;
+int in2 = 4;
 // Motor B connections
-int enB = 3;
-int in3 = 4;
-int in4 = 5;
+int enB = 9;
+int in3 = 8;
+int in4 = 7;
 
 int neew = 0;//for gettings abs val of A
 int oold = 0;//for getting abs val of Aprev
