@@ -1,0 +1,6 @@
+This is the Junior year project at DU. We were tasked to build a robot that will compete 
+in a capture the flag style competition. I was in charge of designing and building the 
+electrical drive train given the specifications we desired as well as all of the sortware 
+portion in controlling a Raspberry Pi 3B+ to gathter data from sensors and make decisions 
+off the information recieved. More information can be found on this project in this google folder
+with all of the design decisions: https://drive.google.com/drive/folders/1I9Unk_LNuAY-TFVylDS6vZldlzd-V0Vw?usp=sharing
